@@ -1,5 +1,5 @@
 var VideoListEntry = (props) => {
-  console.log('hello', props.clickfxn2);
+  //console.log('hello', props.clickfxn2);
   return (
  
     <div className="video-list-entry">

@@ -59,9 +59,10 @@ describe('searchYouTube', function() {
     searchYouTube({ key: 'API_KEY', query: 'cats', max: 10 }, () => {});
 
     var params = getURLSearchParams(requests[0].url);
+    console.log('params', params);
     expect(params.key).to.equal('API_KEY');
-    expect(params.q).to.equal('cats');
-    expect(params.maxResults).to.equal('10');
+    expect(params.query).to.equal('cats');
+    expect(params.max).to.equal('10');
   });
 
   // Same shape means that the data should have the same keys, nested the same way as `exampleVideoData`,
