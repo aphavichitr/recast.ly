@@ -2,18 +2,14 @@ class App extends React.Component {
   
   constructor(props) {
     super(props);
-    //console.log('api', window.YOUTUBE_API_KEY);
-    //console.log('youtube', this._fetchYT());
     this.state = {
-      current: window.exampleVideoData[0], //set this to current video
+      current: window.exampleVideoData[0], 
       videos: []
     };
   }
 
 
   componentWillMount() {
-    //this.setState({videos: window.searchYouTube({key: window.YOUTUBE_API_KEY, query: 'react', max: 10}, () => {})});
-    console.log('suh: ', this.props.searchYouTube);
     this.props.searchYouTube({key: window.YOUTUBE_API_KEY, q: 'cats', maxResults: 10}, (videos) => {
       this.setState({
         videos: videos,
@@ -24,7 +20,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this._timer = setInterval(
-      //this._fetchYT(),
       () => this.props.searchYouTube({key: window.YOUTUBE_API_KEY, q: 'cats', maxResults: 10}, (videos) => {
         this.setState({
           videos: videos,
@@ -42,9 +37,15 @@ class App extends React.Component {
 
 
   handleClick(param) {
-    //console.log(param);
     this.setState({
       current: param.video
+    });
+  }
+
+  handleState(param) {
+    this.setState({
+      current: param[0],
+      videos: param
     });
   }
 
@@ -53,9 +54,10 @@ class App extends React.Component {
     var style = {
       width: '1000px'
     };
+    
     return (
       <div style={style}>
-        <Nav />
+        <Nav search={this.props.searchYouTube} state={this.state} changer={this.handleState.bind(this)} unmount={this.componentWillUnmount.bind(this)}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.current} state={this.state}/>
         </div>

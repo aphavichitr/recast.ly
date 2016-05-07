@@ -1,8 +1,5 @@
-//import App from './App'
-
 var VideoList = (props) => {
-  //console.log('props', props.clickfxn);
-//onClick={props.clickfxn.bind(this)}
+
   var vidList = props.videos.map((item) => {
     return (
       <VideoListEntry video={item} clickfxn2={props.clickfxn}/>
@@ -26,4 +23,3 @@ VideoList.propTypes = {
 // `var` declarations will only exist globally where explicitly defined.
 window.VideoList = VideoList;
 
-//export default VideoList;
