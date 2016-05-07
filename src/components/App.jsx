@@ -11,48 +11,29 @@ class App extends React.Component {
   }
 
 
-  _fetchYT() {
-    $.ajax({
-      url: 'https://www.googleapis.com/youtube/v3/search?part=snippet',
-      data: {key: window.YOUTUBE_API_KEY, q: 'cats', maxResults: 10},
-      type: 'GET',
-      contentType: 'application/json',
-      success: (data) => {
-        console.log('data: ', data.items);
-
-        console.log('state', this.state.videos);
-        var x = this.state.videos;
-        x = x.concat(data.items);
-        this.setState({videos: x});
-      }
-    });
-  }
-
-  addToState(data) {
-    this.setState({
-      videos: data
-    });
-  }
-
   componentWillMount() {
     //this.setState({videos: window.searchYouTube({key: window.YOUTUBE_API_KEY, query: 'react', max: 10}, () => {})});
     console.log('suh: ', this.props.searchYouTube);
-    //this.props.searchYouTube({key: window.YOUTUBE_API_KEY, query: 'react', max: 10}, this.addToState.bind(this));
-    
-    //this.props.searchYouTube({key: window.YOUTUBE_API_KEY, query: 'react', max: 10}, this.addToState);
-
-    this._fetchYT();
-      // console.log('done');
+    this.props.searchYouTube({key: window.YOUTUBE_API_KEY, q: 'cats', maxResults: 10}, (videos) => {
+      this.setState({
+        videos: videos,
+        current: videos[0] 
+      });
+    });
   }
 
   componentDidMount() {
     this._timer = setInterval(
-      this._fetchYT(),
-      //() => this.props.searchYouTube({key: window.YOUTUBE_API_KEY, query: 'react', max: 10}, this.addToState),
+      //this._fetchYT(),
+      () => this.props.searchYouTube({key: window.YOUTUBE_API_KEY, q: 'cats', maxResults: 10}, (videos) => {
+        this.setState({
+          videos: videos,
+          current: videos[0] 
+        });
+      }),
       5000
     );
-    //console.log('HALOO');
-   // console.log('interval', this.props.searchYouTube);
+
   }
 
   componentWillUnmount() {
