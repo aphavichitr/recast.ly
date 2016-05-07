@@ -13,7 +13,7 @@ class Search extends React.Component {
   render() {
     return (
       <div className="search-bar form-inline">
-        <input className="form-control" type="text" ref={(input) => this._vids = input} onChange={_.debounce(this.fxn.bind(this), 500, true)}/>
+        <input className="form-control" type="text" ref={(input) => this._vids = input} onChange={_.debounce(this.fxn.bind(this), 500)}/>
         <button className="btn hidden-sm-down">
           <span className="glyphicon glyphicon-search"></span>
         </button>

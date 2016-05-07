@@ -22,8 +22,8 @@ class App extends React.Component {
     this._timer = setInterval(
       () => this.props.searchYouTube({key: window.YOUTUBE_API_KEY, q: 'cats', maxResults: 10}, (videos) => {
         this.setState({
-          videos: videos,
-          current: videos[0] 
+          videos: videos
+          //current: videos[0] 
         });
       }),
       5000
@@ -54,15 +54,15 @@ class App extends React.Component {
     var style = {
       width: '1000px'
     };
-    
+
     return (
       <div style={style}>
         <Nav search={this.props.searchYouTube} state={this.state} changer={this.handleState.bind(this)} unmount={this.componentWillUnmount.bind(this)}/>
         <div className="col-md-7">
-          <VideoPlayer video={this.state.current} state={this.state}/>
+          <VideoPlayer video={this.state.current}/>
         </div>
         <div className="col-md-5">
-          <VideoList videos={this.state.videos} state={this.state} clickfxn={this.handleClick.bind(this)}/>
+          <VideoList videos={this.state.videos} clickfxn={this.handleClick.bind(this)}/>
         </div>
       </div>
     );
