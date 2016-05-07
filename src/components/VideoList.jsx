@@ -1,16 +1,20 @@
+//import App from './App'
+
 var VideoList = (props) => {
-  //console.log('props', props);
+  //console.log('props', props.clickfxn);
+//onClick={props.clickfxn.bind(this)}
   var vidList = props.videos.map((item) => {
     return (
-      <VideoListEntry video={item} />
+      <VideoListEntry video={item} clickfxn2={props.clickfxn}/>
     );
   });
 
-  return  (
+  return (
     <div className="video-list media">
       {vidList}
     </div>
   );
+
 };
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated
@@ -21,3 +25,5 @@ VideoList.propTypes = {
 // In the ES6 spec, files are "modules" and do not share a top-level scope.
 // `var` declarations will only exist globally where explicitly defined.
 window.VideoList = VideoList;
+
+//export default VideoList;
